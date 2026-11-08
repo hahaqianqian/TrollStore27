@@ -92,24 +92,22 @@ struct MainView: View {
                                 .frame(maxWidth: geometry.size.width / 1.2)
                                 .frame(maxHeight: 60)
                             }
-                            if device.supportsCoreTrustInstall && !isInstalling {
-                                Button(action: {
-                                    UIImpactFeedbackGenerator().impactOccurred()
-                                    refreshAppRegistrationsCoreTrust()
-                                }, label: {
-                                    Text("Refresh App Registrations")
-                                            .font(.system(size: 17, weight: .semibold, design: .rounded))
-                                            .foregroundColor(.white)
-                                            .padding()
-                                            .frame(maxWidth: geometry.size.width / 1.2)
-                                            .frame(maxHeight: 60)
-                                })
-                                .frame(maxWidth: geometry.size.width / 1.2)
-                                .frame(maxHeight: 60)
-                            }
                         }
                         .padding()
                         .disabled(!device.isSupported)
+                        
+                        if device.supportsCoreTrustInstall && !isInstalling && !isShowingMDCAlert && !isShowingOTAAlert && !isShowingSettings && !isShowingCredits && !helperView.showAlert {
+                            Button(action: {
+                                UIImpactFeedbackGenerator().impactOccurred()
+                                refreshAppRegistrationsCoreTrust()
+                            }, label: {
+                                Text("Refresh App Registrations")
+                                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                        .foregroundColor(.white.opacity(0.85))
+                                        .underline()
+                            })
+                            .padding(.bottom, 10)
+                        }
                         
                         
                         }
